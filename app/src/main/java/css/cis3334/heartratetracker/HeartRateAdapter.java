@@ -14,8 +14,7 @@ import android.widget.TextView;
  * For the CIS 3334 class at St. Scholastica
  */
 
-public class HeartRateAdapter  extends ArrayAdapter<HeartRate> {
-
+public class HeartRateAdapter extends ArrayAdapter<HeartRate> {
     private final Context context;      // The activity calling this adapter
     private HeartRateList hrList;       // The object holding the arraylist of hear rates
 
@@ -45,12 +44,42 @@ public class HeartRateAdapter  extends ArrayAdapter<HeartRate> {
     public View getView(int position, View convertView, ViewGroup parent) {
         //
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.heart_rate_row, null);
-        //get the heart rate we are displaying
         HeartRate hr = hrList.getHeartRate(position);
+        View view = inflater.inflate(R.layout.heart_rate_row, null);
+
+        TextView tvRange=(TextView)view.findViewById(R.id.textViewRange);
+        tvRange.setText(hr.getRangeName().toString());
 
         TextView tvPulse=(TextView)view.findViewById(R.id.textViewPulse);
         tvPulse.setText(hr.getPulse().toString());
+
+
+        TextView tvResult=(TextView)view.findViewById(R.id.textViewResult);
+        tvResult.setText(hr.getRangeDescrtiption().toString());
+
+        if(hr.getRange() == 0) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone0));
+        }
+
+        if(hr.getRange() == 1) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone1));
+        }
+
+        if(hr.getRange() == 2) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone2));
+        }
+
+        if(hr.getRange() == 3) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone3));
+        }
+
+        if(hr.getRange() == 4) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone4));
+        }
+
+        if(hr.getRange() == 5) {
+            tvRange.setTextColor(ContextCompat.getColor(context, R.color.colorZone5));
+        }
 
         return(view);
     }
